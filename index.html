@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<!--
+  SMART SETRIKSA - halaman pembungkus
+  Aplikasi Apps Script dimuat di dalam halaman ini supaya banner
+  "Aplikasi ini dibuat oleh pengguna Google Apps Script" tidak muncul.
+
+  Link web app Smart Setriksa (berakhiran /exec). Kalau suatu saat link berubah, ganti di bawah ini:
+-->
+<script>var URL_APLIKASI = 'https://script.google.com/macros/s/AKfycbwQvcaSmhy3YnLgJRVBzr1kzk3ZsymtAPKtEVz4k-V1Gq3bcu640UCYti8idv2kkJG1/exec';</script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Smart Setriksa</title>
+<meta name="description" content="Smart Setriksa - Cepat, tepat, teliti, dan aman">
+<meta name="theme-color" content="#0b1434">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Smart Setriksa">
+<link rel="icon" type="image/png" href="logo.png">
+<link rel="apple-touch-icon" href="logo-180.png">
+<link rel="manifest" href="manifest.json">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+<style>
+  html, body { margin:0; height:100%; background:#050a1a; overflow:hidden; }
+  /* aplikasi memenuhi layar, di bawah status bar HP */
+  #app { position:fixed; top:0; left:0; right:0; bottom:0; width:100%; height:100%; border:0; display:block;
+         padding-top:env(safe-area-inset-top); box-sizing:border-box; background:#050a1a; }
+  /* layar pembuka selama aplikasi dimuat */
+  #splash { position:fixed; top:0; left:0; right:0; bottom:0; z-index:2; display:flex; flex-direction:column; align-items:center; justify-content:center;
+            background:radial-gradient(circle at 50% 40%, #13214d 0%, #0b1434 45%, #050a1a 100%); font-family:Inter, system-ui, sans-serif;
+            transition:opacity .4s ease, visibility .4s ease; }
+  #splash.hilang { opacity:0; visibility:hidden; }
+  .lg { width:118px; height:118px; position:relative; margin-bottom:18px; }
+  .lg:before { content:""; position:absolute; top:0; left:0; right:0; bottom:0; border-radius:50%; border:3px solid rgba(230,185,80,.18); border-top-color:#e2b34a; animation:rot .9s linear infinite; }
+  .lg img { position:absolute; top:14px; left:14px; width:90px; height:90px; object-fit:contain; }
+  #splash b { color:#f0c969; font-size:24px; letter-spacing:.3px; }
+  #splash i { font-family:'Dancing Script', cursive; font-style:normal; color:#e9d6a4; font-size:18px; margin-top:4px; }
+  #splash small { color:#8c9bb8; font-size:13px; margin-top:14px; }
+  #splash .err { color:#ffb4a8; max-width:300px; text-align:center; line-height:1.5; }
+  @keyframes rot { to { transform:rotate(360deg); } }
+</style>
+</head>
+<body>
+<div id="splash">
+  <div class="lg"><img src="logo.png" alt=""></div>
+  <b>Smart Setriksa</b>
+  <i>Cepat, tepat, teliti, dan aman</i>
+  <small id="msg">Membuka aplikasi...</small>
+</div>
+<iframe id="app" title="Smart Setriksa" allow="clipboard-read; clipboard-write; camera; fullscreen"></iframe>
+<script>
+  (function () {
+    var f = document.getElementById('app'), sp = document.getElementById('splash');
+    if (!/^https:\/\/script\.google\.com\/.+\/exec/.test(URL_APLIKASI)) {
+      document.getElementById('msg').innerHTML = '<span class="err">Link aplikasi belum diisi. Buka file index.html, ganti TEMPEL_LINK_EXEC_DI_SINI dengan link web app (berakhiran /exec).</span>';
+      return;
+    }
+    f.onload = function () { setTimeout(function () { sp.className = 'hilang'; }, 300); };
+    f.src = URL_APLIKASI;
+    // pengaman: kalau lama, layar pembuka tetap ditutup supaya layar loading aplikasi terlihat
+    setTimeout(function () { sp.className = 'hilang'; }, 15000);
+  })();
+</script>
+</body>
+</html>
