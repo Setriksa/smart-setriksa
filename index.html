@@ -11,6 +11,8 @@
 -->
 <script>var URL_APLIKASI = 'https://script.google.com/macros/s/AKfycbwQvcaSmhy3YnLgJRVBzr1kzk3ZsymtAPKtEVz4k-V1Gq3bcu640UCYti8idv2kkJG1/exec';</script>
 
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Smart Satrimalurmat</title>
 <meta name="description" content="Smart Satrimalurmat - Cepat, tepat, teliti, dan aman">
@@ -59,7 +61,7 @@
       return;
     }
     f.onload = function () { setTimeout(function () { sp.className = 'hilang'; }, 300); };
-    f.src = URL_APLIKASI;
+    f.src = URL_APLIKASI + (URL_APLIKASI.indexOf('?') < 0 ? '?' : '&') + 'v=' + Date.now();   // selalu ambil versi terbaru, bukan simpanan lama di HP
     // pengaman: kalau lama, layar pembuka tetap ditutup supaya layar loading aplikasi terlihat
     setTimeout(function () { sp.className = 'hilang'; }, 15000);
   })();
